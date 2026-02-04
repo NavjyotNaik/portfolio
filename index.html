@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name | Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f2f8e9, #ffffff);
+      color: #1f2937;
+      overflow-x: hidden;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      gap: 70px;
+      padding: 70px 90px;
+      max-width: 1400px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .floating-ui {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .ui-shape {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(190,225,90,0.55), rgba(160,210,60,0.25));
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.25s ease-out;
+    }
+
+    .shape-a { width: 280px; height: 90px; top: 10%; left: 4%; }
+    .shape-b { width: 180px; height: 180px; top: 60%; left: 6%; transform: rotate(18deg); }
+    .shape-c { width: 340px; height: 110px; top: 12%; right: 4%; transform: rotate(-12deg); }
+    .shape-d { width: 140px; height: 240px; top: 55%; right: 6%; transform: rotate(8deg); }
+    .shape-e { width: 220px; height: 80px; bottom: 6%; left: 30%; transform: rotate(-6deg); }
+    .shape-f { width: 110px; height: 110px; top: 38%; left: 46%; transform: rotate(25deg); }
+
+    .hero-left { width: 35%; }
+    .hero-right { width: 65%; padding-top: 10px; }
+
+    .photo-box {
+      background: #e8f0d9;
+      padding: 14px;
+      border-radius: 18px;
+      width: fit-content;
+    }
+
+    .photo-box img { width: 240px; border-radius: 14px; object-fit: cover; display: block; }
+
+    .contact { margin-top: 24px; padding: 16px; border-left: 3px solid #8fb339; background: #f7fbef; border-radius: 8px; font-size: 14px; }
+    .contact p { margin-bottom: 6px; }
+
+    .section-block { margin-top: 34px; }
+    .section-block h3 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; color: #7fa22f; margin-bottom: 10px; }
+    .section-block .sub { font-size: 14px; font-weight: 500; margin-top: 10px; }
+    .section-block span { font-size: 13px; color: #4b5563; display: block; margin-top: 4px; }
+
+    .hero-right h1 { font-size: 44px; font-weight: 600; }
+    .hero-right h2 { font-size: 16px; font-weight: 400; color: #7fa22f; margin: 12px 0 36px; }
+
+    .about { background: #ffffff; padding: 26px 30px; border-radius: 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.05); margin-bottom: 28px; }
+    .about h3 { font-size: 17px; margin-bottom: 10px; }
+    .about p { font-size: 15px; line-height: 1.7; }
+
+    .graphic-section { background: #5e7c3a; color: #fff; padding: 70px 90px; }
+    .graphic-section h2 { font-size: 36px; font-weight: 600; margin-bottom: 8px; }
+    .graphic-section .my-logos { font-size: 20px; font-weight: 500; margin-top: 12px; color: #ffffff; }
+
+    .logo-subsection { background: #ffffff; padding: 70px 90px; display: flex; gap: 50px; }
+    .logo-left { flex: 3; } 
+    .logo-right { flex: 2; display: flex; align-items: flex-start; }
+
+    .logo-left .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .logo-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 0 0 1px #d1d5db; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .logo-card img { max-width: 100%; height: auto; }
+    .logo-card:hover { transform: translateY(-6px); box-shadow: 0 14px 28px rgba(0,0,0,0.12); }
+
+    .logo-right p { font-size: 15px; line-height: 1.7; color: #1f2937; }
+
+    .identity-green-strip { background:#5e7c3a; padding:50px 90px; color:#fff; }
+    .identity-green-strip h2 { font-size:20px; font-weight:500; margin-bottom:0; }
+
+    .identity-section { background:#ffffff; padding:70px 90px; display:flex; gap:50px; }
+    .identity-left { flex:3; display:flex; flex-wrap:wrap; gap:20px; }
+    .identity-right { flex:2; display:flex; align-items:flex-start; }
+    .identity-left .logo-card { flex:1 1 180px; }
+
+    /* UI/UX SECTION */
+    .uiux-section { background: #ffffff; padding:70px 90px; }
+    .uiux-section h2 { font-size: 36px; font-weight: 600; margin-bottom: 24px; color:#1f2937; }
+    .uiux-project { margin-bottom: 40px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); padding: 24px; background:#f9f9f9; display: flex; gap: 30px; align-items: flex-start; }
+    .uiux-project h3 { font-size: 24px; font-weight: 600; margin-bottom: 12px; color:#5e7c3a; }
+    .uiux-screens { flex: 1; display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 16px; margin-bottom: 12px; }
+    .uiux-screens img, .uiux-screens video { width: 100%; border-radius: 8px; }
+    .uiux-desc { flex: 1; font-size: 15px; line-height:1.6; color:#1f2937; }
+
+    /* ============================================
+       RESPONSIVE MEDIA QUERIES
+       ============================================ */
+
+    /* Tablets and below (1024px) */
+    @media (max-width: 1024px) {
+      .hero { gap: 50px; padding: 50px 40px; }
+      .hero-left { width: 40%; }
+      .hero-right { width: 60%; }
+      .hero-right h1 { font-size: 36px; }
+      
+      .graphic-section { padding: 50px 40px; }
+      .graphic-section h2 { font-size: 30px; }
+      .graphic-section .my-logos { font-size: 18px; }
+      
+      .logo-subsection { padding: 50px 40px; gap: 40px; }
+      .logo-left .logo-grid { grid-template-columns: repeat(2, 1fr); }
+      
+      .identity-green-strip { padding: 40px 40px; }
+      .identity-section { padding: 50px 40px; gap: 40px; }
+      
+      .uiux-section { padding: 50px 40px; }
+      .uiux-project { gap: 20px; }
+    }
+
+    /* Mobile landscape and small tablets (900px) */
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; padding: 40px 30px; gap: 30px; }
+      .hero-left, .hero-right { width: 100%; }
+      .hero-left { display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .photo-box { margin: 0 auto; }
+      .contact { text-align: left; }
+      .section-block { text-align: left; }
+      
+      .hero-right h1 { font-size: 32px; }
+      .hero-right h2 { font-size: 15px; }
+      
+      /* Adjust floating shapes for mobile */
+      .shape-a { width: 200px; height: 70px; top: 5%; left: 2%; }
+      .shape-b { width: 120px; height: 120px; top: 50%; left: 3%; }
+      .shape-c { width: 240px; height: 80px; top: 8%; right: 2%; }
+      .shape-d { width: 100px; height: 180px; top: 45%; right: 3%; }
+      .shape-e { width: 160px; height: 60px; bottom: 4%; left: 20%; }
+      .shape-f { width: 80px; height: 80px; top: 30%; left: 40%; }
+      
+      .logo-subsection { flex-direction: column; padding: 40px 30px; }
+      .logo-left, .logo-right { width: 100%; }
+      
+      .identity-section { flex-direction: column; padding: 40px 30px; }
+      .identity-left, .identity-right { width: 100%; }
+      
+      .uiux-project { flex-direction: column; padding: 20px; }
+      .uiux-screens { grid-template-columns: 1fr; }
+    }
+
+    /* Small mobile devices (600px) */
+    @media (max-width: 600px) {
+      .hero { padding: 30px 20px; }
+      .hero-right h1 { font-size: 28px; }
+      .hero-right h2 { font-size: 14px; margin: 10px 0 24px; }
+      
+      .photo-box img { width: 200px; }
+      
+      .about { padding: 20px; margin-bottom: 20px; }
+      .about h3 { font-size: 16px; }
+      .about p { font-size: 14px; }
+      
+      .section-block h3 { font-size: 14px; }
+      .section-block .sub { font-size: 13px; }
+      .section-block span { font-size: 12px; }
+      
+      .graphic-section { padding: 40px 20px; }
+      .graphic-section h2 { font-size: 26px; }
+      .graphic-section .my-logos { font-size: 16px; }
+      
+      .logo-subsection { padding: 30px 20px; gap: 30px; }
+      .logo-left .logo-grid { grid-template-columns: 1fr; gap: 15px; }
+      .logo-right p { font-size: 14px; }
+      
+      .identity-green-strip { padding: 30px 20px; }
+      .identity-green-strip h2 { font-size: 18px; }
+      
+      .identity-section { padding: 30px 20px; gap: 30px; }
+      .identity-left { gap: 15px; }
+      .identity-left .logo-card { flex: 1 1 100%; }
+      
+      .uiux-section { padding: 30px 20px; }
+      .uiux-section h2 { font-size: 28px; margin-bottom: 20px; }
+      .uiux-project { padding: 16px; margin-bottom: 30px; }
+      .uiux-project h3 { font-size: 20px; margin-bottom: 10px; }
+      .uiux-desc { font-size: 14px; }
+      
+      /* Make shapes smaller on very small screens */
+      .shape-a { width: 140px; height: 50px; }
+      .shape-b { width: 80px; height: 80px; }
+      .shape-c { width: 180px; height: 60px; }
+      .shape-d { width: 70px; height: 140px; }
+      .shape-e { width: 120px; height: 45px; }
+      .shape-f { width: 60px; height: 60px; }
+    }
+
+    /* Extra small mobile devices (400px) */
+    @media (max-width: 400px) {
+      .hero { padding: 20px 15px; }
+      .hero-right h1 { font-size: 24px; }
+      .hero-right h2 { font-size: 13px; }
+      
+      .photo-box { padding: 10px; }
+      .photo-box img { width: 160px; }
+      
+      .contact { padding: 12px; font-size: 13px; }
+      
+      .about { padding: 16px; }
+      .about h3 { font-size: 15px; }
+      .about p { font-size: 13px; }
+      
+      .graphic-section { padding: 30px 15px; }
+      .graphic-section h2 { font-size: 22px; }
+      .graphic-section .my-logos { font-size: 15px; }
+      
+      .logo-subsection { padding: 25px 15px; }
+      .logo-card { padding: 15px; }
+      
+      .identity-green-strip { padding: 25px 15px; }
+      .identity-green-strip h2 { font-size: 16px; }
+      
+      .identity-section { padding: 25px 15px; }
+      
+      .uiux-section { padding: 25px 15px; }
+      .uiux-section h2 { font-size: 24px; }
+      .uiux-project { padding: 12px; }
+      .uiux-project h3 { font-size: 18px; }
+      .uiux-desc { font-size: 13px; }
+    }
+
+    /* Ensure videos and images are always responsive */
+    video, img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Fix for logo cards on all screen sizes */
+    .logo-card img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    /* ===== Fix alignment for skills blocks on mobile ===== */
+@media (max-width: 900px) {
+  .hero-left {
+    align-items: stretch; /* full width blocks */
+  }
+
+  .section-block {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Make all skill blocks visually consistent */
+  .section-block h3 {
+    margin-bottom: 8px;
+  }
+
+  .section-block span {
+    display: block;
+    line-height: 1.6;
+  }
+
+  /* Add spacing so single-span sections match Technical Skills height */
+  .section-block:not(:first-of-type) {
+    padding-top: 4px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO PAGE -->
+  <section class="hero">
+    <div class="floating-ui">
+      <div class="ui-shape shape-a"></div>
+      <div class="ui-shape shape-b"></div>
+      <div class="ui-shape shape-c"></div>
+      <div class="ui-shape shape-d"></div>
+      <div class="ui-shape shape-e"></div>
+      <div class="ui-shape shape-f"></div>
+    </div>
+
+    <div class="hero-left">
+      <div class="photo-box">
+        <img src="navjyot.jpg" alt="Your Photo">
+      </div>
+
+      <div class="contact">
+        <p><strong>Phone:</strong> <a href="tel:+917875901117" style="color:inherit; text-decoration:none;">+91 7875901117</a></p>
+        <p><strong>Email:</strong> <a href="mailto:navjyotnaik29@gmail.com" style="color:inherit; text-decoration:none;">navjyotnaik29@gmail.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/navjyot-naik-5b267a316" target="_blank" style="color:inherit; text-decoration:none;">LinkedIn Profile</a></p>
+      </div>
+
+      <div class="section-block">
+        <h3>Technical Skills</h3>
+        <p class="sub">Graphic Design</p>
+        <span>Coral Draw | Canva | Photoshop</span>
+
+        <p class="sub">UI / UX Design</p>
+        <span>Figma | Wireframing | Prototyping | User Research</span>
+
+        <p class="sub">Web Development</p>
+        <span>HTML | CSS | PHP | JavaScript</span>
+      </div>
+
+      <div class="section-block">
+        <h3>Interests</h3>
+        <span>Sketching | Swimming | Trekking | Traveling</span>
+      </div>
+
+      <div class="section-block">
+        <h3>Languages</h3>
+        <span>English | Konkani | Marathi | Hindi</span>
+      </div>
+
+      <div class="section-block">
+        <h3>Soft Skills</h3>
+        <span>Adaptability | Quick learner | Team collaboration | Responsible | Disciplined</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <h1>NAVJYOT R NAIK</h1>
+      <h2>Graphic Designer · UI/UX Designer · Web Developer</h2>
+
+      <div class="about">
+        <h3>About Me</h3>
+        <p>
+          I work with graphic design, UI/UX design, and front-end development 
+          to create responsive, user-friendly, and visually clear digital experiences. 
+          I focus on turning ideas into simple, effective interfaces that enhance 
+          usability, while applying strong visual fundamentals to ensure consistency and clarity across designs.
+          My approach combines thoughtful design decisions with practical implementation 
+          to deliver intuitive and engaging user experiences.
+        </p>
+      </div>
+
+      <div class="about">
+        <h3>Education</h3>
+        <p><h4>B.E Computer Engineering</h4> – Shree Rayeshwar Institute of Engineering and Information Technology</p>
+        <p><h4>UX Course</h4> – Tata Strive</p>
+        <p><h4>HSSC</h4> – Shiroda Higher Secondary School</p>
+        <p><h4>SCC</h4> – School of Symbiosis</p>
+      </div>
+
+      <div class="about">
+        <h3>Experience</h3>
+
+        <p>
+          <strong>Web Developer | July 2024 - August 2024</strong><br>
+          Perceptionyst Solutions LLP<br>
+          Interned at Perceptionyst Solutions LLP, contributing to front-end development and UI design by building responsive web pages, refining user interfaces, and supporting consistent user experiences across multiple devices.
+        </p>
+
+        <p>
+          <strong>Graphic Designer | Nov 2025 - Till Date</strong><br>
+          Sanswara Services<br>
+          Worked as a Graphic Designer at Sanswara Services, responsible for designing banners, business cards, logos, and flyers using CorelDRAW and Canva, while ensuring visual consistency and professional design standards.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAPHIC DESIGN SECTION -->
+  <section class="graphic-section">
+    <div style="max-width: 1400px; margin: auto;">
+      <h2>Graphic Design</h2>
+      <div class="my-logos">My Logos</div>
+    </div>
+  </section>
+
+  <!-- LOGO DISPLAY SUBSECTION -->
+  <section class="logo-subsection">
+    <div class="logo-left">
+      <div class="logo-grid">
+        <div class="logo-card"><img src="lumora.png" alt="Logo 1"></div>
+        <div class="logo-card"><img src="shantadurga.png" alt="Logo 2"></div>
+        <div class="logo-card"><img src="syntx.png" alt="Logo 3"></div>
+        <div class="logo-card"><img src="rosera.png" alt="Logo 4"></div>
+        <div class="logo-card"><img src="blooma.png" alt="Logo 5"></div>
+      </div>
+    </div>
+    <div class="logo-right">
+      <p>
+        These are the logos I created as part of my personal projects, exploring different styles and ideas in graphic design and branding.
+      </p>
+    </div>
+  </section>
+
+  <!-- IDENTITY LAB GREEN STRIP -->
+  <section class="identity-green-strip">
+    <div style="max-width:1400px; margin:auto;">
+      <h2>Identity Lab</h2>
+    </div>
+  </section>
+
+  <!-- IDENTITY LAB FLEXIBLE GRID -->
+  <section class="identity-section">
+    <div class="identity-left">
+      <div class="logo-card"><img src="karate.png" alt="Identity 1"></div>
+      <div class="logo-card"><img src="foodcourt.png" alt="Identity 2"></div>
+      <div class="logo-card"><img src="rn_creation.png" alt="Identity 3"></div>
+      <div class="logo-card"><img src="thankyou.png" alt="Identity 4"></div>
+      <div class="logo-card"><img src="weddingcard1.png" alt="Identity 5"></div>
+      <div class="logo-card"><img src="businesscard1.png" alt="Identity 6"></div>
+      <div class="logo-card"><img src="amul.png" alt="Identity 7"></div>
+      <div class="logo-card"><img src="flyer1.png" alt="Identity 8"></div>
+      <div class="logo-card"><img src="flyer2.png" alt="Identity 9"></div>
+      <div class="logo-card"><img src="services.png" alt="Identity 10"></div>
+      <div class="logo-card"><img src="shantadurga2.png" alt="Identity 11"></div>
+      <div class="logo-card"><img src="weddingcard2.png" alt="Identity 12"></div>
+      <div class="logo-card"><img src="certificate.png" alt="Identity 13"></div>
+      <div class="logo-card"><img src="painting1.png" alt="Identity 14"></div>
+      <div class="logo-card"><img src="painting2.png" alt="Identity 15"></div>
+      <div class="logo-card"><img src="ullasa1.png" alt="Identity 16"></div>
+      <div class="logo-card"><img src="trad.png" alt="Identity 17"></div>
+      <div class="logo-card"><img src="analogous.png" alt="Identity 18"></div>
+      <div class="logo-card"><img src="karate_Complementary.png" alt="Identity 19"></div>
+      <div class="logo-card"><img src="monochromatic.png" alt="Identity 20"></div>
+    </div>
+    <div class="identity-right">
+      <p>
+        These are the designs I created during my work, showing my approach to branding and identity design.
+        Each design focuses on clear visuals, basic layout, and consistent use of colors and typography to match the brand's needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- UI/UX GREEN STRIP -->
+  <section class="identity-green-strip">
+    <div style="max-width:1400px; margin:auto;">
+      <h2>UI / UX Projects</h2>
+    </div>
+  </section>
+
+  <!-- UI/UX PROJECTS SECTION -->
+  <section class="uiux-section">
+    <!-- Project 1 -->
+    <div class="uiux-project">
+      <div class="uiux-screens">
+        <video controls src="Easy.mp4"></video>
+      </div>
+      <div class="uiux-desc">
+        <h3>Easy Parking</h3>
+        Easy Parking is a UI/UX project focused on creating a smooth and intuitive parking experience for users.
+        The solution allows users to quickly find nearby parking spaces, check real-time availability, compare prices, and reserve a 
+        spot in advance. The design prioritizes clarity, easy navigation, and minimal user effort, reducing the time and stress involved in parking.
+        
+        User flows were carefully structured to keep actions simple, while visual elements such as clear icons, readable typography, 
+        and consistent spacing improve usability. The overall experience is designed to be practical, accessible, and efficient, 
+        making parking management easier for both daily commuters and occasional users.
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="uiux-project">
+      <div class="uiux-screens">
+        <video controls src="calendar App for Kids.mp4"></video>
+      </div>
+      <div class="uiux-desc">
+        <h3>Calendar App for Kids</h3>
+        Calendar for Kids is a simple and easy-to-understand scheduling app designed to help children follow daily routines.
+        The interface focuses on clarity, with clean layouts, minimal colors, and large readable elements to ensure information is easy to scan 
+        and understand. Activities such as school, homework, and events are organized in a structured way, reducing confusion and cognitive load.
+        
+        The design emphasizes straightforward navigation and consistency, 
+        helping children quickly understand what they need to do and when. By keeping interactions minimal 
+        and the layout predictable, the calendar supports better time awareness and routine management without overwhelming the user.
+      </div>
+    </div>
+
+    <div class="uiux-project">
+      <div class="uiux-screens">
+        <video controls src="Parallax.mp4"></video>
+      </div>
+      <div class="uiux-desc">
+        <h3>Parallax Experience</h3>
+        This project is a coffee shop landing page featuring a coffee cup placed on a table surrounded by coffee beans inside a café setting.
+        The design focuses on strong visual hierarchy and a calm, inviting layout that highlights the product as the main focal point. 
+        Clean typography, balanced spacing, and warm tones are used to reflect the cozy atmosphere of a coffee shop.
+        
+        The landing experience is designed to be simple and immersive, guiding users' attention naturally to the coffee cup, brand message, 
+        and call-to-action without unnecessary distractions.
+      </div>
+    </div>
+  </section>
+
+  <!-- WEB DEVELOPMENT GREEN STRIP -->
+  <section class="identity-green-strip">
+    <div style="max-width:1400px; margin:auto;">
+      <h2>Web Development Projects</h2>
+    </div>
+  </section>
+
+  <!-- WEB DEVELOPMENT PROJECTS SECTION -->
+  <section class="uiux-section">
+    <!-- Project 1 -->
+    <div class="uiux-project">
+      <div class="uiux-screens">
+        <video controls src="final year project.mp4"></video>
+      </div>
+      <div class="uiux-desc">
+        <h3>Automated Cyberbullying and Hatespeech Detection System</h3>
+        
+        This project is a web application designed to detect harmful content and hate speech on Twitter across multiple data formats, including text, images, and audio.
+        The system analyzes tweets and user-generated content to identify abusive language, hate speech, and harmful behavior, helping improve online safety on social media platforms.
+        
+        The application supports multimodal detection, where text is processed for abusive keywords and patterns, 
+        images are analyzed to identify offensive visual content, and audio inputs are examined to detect harmful speech. 
+        The web interface allows users or moderators to submit content, view detection results, and understand the severity of the 
+        identified content through a clear and structured dashboard.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const shapes = document.querySelectorAll('.ui-shape');
+    const hero = document.querySelector('.hero');
+
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      shapes.forEach((shape, index) => {
+        const speed = (index + 1) * 0.02;
+
+        shape.style.transform =
+          `translate(${x * speed}px, ${y * speed}px) rotate(${index * 7}deg)`;
+      });
+    });
+  </script>
+
+</body>
+</html>
